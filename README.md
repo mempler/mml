@@ -22,25 +22,6 @@ class YourGame : Game
 }
 ```
 
-```cs
-class YourGame : Game
-{
-    [BackgroundDependencyLoader]
-    private void load()
-    {
-        var xamlData = "<oml>" +
-                            "<Box width=\"250px\" height=\"250px\" colour=\"#FF0000\" position=\"0,0\"/>" +
-                        "</oml>"
-        // Create a parser from our xamlData.
-        var parser = new MmlParser(xamlData);
-        // Pass our parser into our DisplayContainer so it'll construct on "Add"
-        var display = new MmlDisplayContainer(parser);
-
-        Child = display;
-    }
-}
-```
-
 ```xml
 <mml>
     <Box width="250px" height="250px" colour="#FF0000" position="0,0"/>
