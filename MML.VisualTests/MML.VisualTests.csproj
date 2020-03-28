@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MML\MML.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\MML\Box.mml" />
+      <EmbeddedResource Include="Resources\MML\Box.mml" />
+    </ItemGroup>
+
+</Project>

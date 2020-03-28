@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MML", "MML\MML.csproj", "{1D1EB7EA-3084-44C7-99E2-FA5273B2A2CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MML.VisualTests", "MML.VisualTests\MML.VisualTests.csproj", "{2B3C42BA-10BD-4CC0-83A5-2EA78FD2C793}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D1EB7EA-3084-44C7-99E2-FA5273B2A2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1EB7EA-3084-44C7-99E2-FA5273B2A2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1EB7EA-3084-44C7-99E2-FA5273B2A2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1EB7EA-3084-44C7-99E2-FA5273B2A2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B3C42BA-10BD-4CC0-83A5-2EA78FD2C793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3C42BA-10BD-4CC0-83A5-2EA78FD2C793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3C42BA-10BD-4CC0-83A5-2EA78FD2C793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3C42BA-10BD-4CC0-83A5-2EA78FD2C793}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
