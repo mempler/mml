@@ -8,8 +8,9 @@
         <PackageProjectUrl>https://github.com/Mempler/mml</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/Mempler/mml/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Mempler/mml</RepositoryUrl>
-        <PackageTags>o!F osu!Framework osu MML markup XML XAML</PackageTags>
+        <PackageTags>o!F osu!Framework osu MML markup XML XAML framework</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
     
     <ItemGroup>

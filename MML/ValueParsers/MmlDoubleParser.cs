@@ -24,6 +24,9 @@ namespace MML.ValueParsers
 
             var f = double.TryParse(nm, out var num) ? num : 0f;
 
+            if (value.StartsWith("-"))
+                f = -f;
+
             var pixel = unit switch
             {
                 "in" => UnitConverter.Inch2Pixel(f),
