@@ -1,7 +1,8 @@
-﻿using osu.Framework.Allocation;
+﻿using System.Linq;
+using JetBrains.Annotations;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Textures;
 
 namespace MML
 {
@@ -17,6 +18,22 @@ namespace MML
             FillMode = FillMode.Stretch;
             
             _parser = parser;
+        }
+
+        // this will fail if too many nested objects. need optimization.
+        private static Drawable StackableLoop(string name, Drawable drawable)
+        {
+            if (drawable.Name == name)
+                return drawable;
+            
+            var children = (drawable as Container<Drawable>)?.Children;
+            return children?.Select(child => StackableLoop(name, child)).FirstOrDefault(result => result != null);
+        }
+
+        [CanBeNull]
+        public T GetByName<T>(string name) where T : Drawable
+        {
+            return (T) StackableLoop(name, this);
         }
 
         [BackgroundDependencyLoader]

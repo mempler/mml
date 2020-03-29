@@ -22,6 +22,12 @@ namespace MML
             var bytes = base.Get(name);
             var data = Encoding.Default.GetString(bytes).Trim();
             
+            var byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+            if (data.StartsWith(byteOrderMarkUtf8))
+            {
+                data = data.Remove(0, byteOrderMarkUtf8.Length);
+            }
+
             var parser = new MmlParser(data);
             return new MmlDisplayContainer(parser);
         }

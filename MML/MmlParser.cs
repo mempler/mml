@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.Xml.Linq;
 using MML.Factories;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Textures;
 using osu.Framework.Logging;
 
 namespace MML
@@ -30,12 +28,6 @@ namespace MML
 
         public MmlParser(string data, IMmlValueParserFactory parserFactory = null, IMmlObjectFactory objectFactory = null)
         {
-            var byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
-            if (data.StartsWith(byteOrderMarkUtf8))
-            {
-                data = data.Remove(0, byteOrderMarkUtf8.Length);
-            }
-            
             _xdoc = XDocument.Parse(data);
 
             _parserFactory = parserFactory ?? new MmlValueParserFactory();

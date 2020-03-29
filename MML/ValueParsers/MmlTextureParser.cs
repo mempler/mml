@@ -1,7 +1,6 @@
 using System;
 using MML.Factories;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Textures;
 
 namespace MML.ValueParsers

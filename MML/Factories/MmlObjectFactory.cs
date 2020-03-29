@@ -8,8 +8,6 @@ using System.Runtime.InteropServices;
 using System.Xml.Linq;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Transforms;
-using osu.Framework.Graphics.Video;
 
 namespace MML.Factories
 {
@@ -36,7 +34,30 @@ namespace MML.Factories
 
             if (_cachedObjectTypes.TryGetValue(name, out var cached))
             {
-                createdObject = (Drawable) Activator.CreateInstance(cached);
+                var constructorInfos = cached.GetConstructors()
+                    .Where(x => 
+                        x.GetParameters().Length > 0 &&
+                        x.GetParameters()
+                            .Count(param => param.GetCustomAttributes(typeof(OptionalAttribute), false)
+                                .Any()) == x.GetParameters().Length)
+                    .ToArray();  
+                
+                if (constructorInfos.Length >= 1)
+                {
+                    var ctor = constructorInfos.First();
+                    createdObject = (Drawable) ctor
+                        .Invoke(BindingFlags.OptionalParamBinding | 
+                                BindingFlags.InvokeMethod | 
+                                BindingFlags.CreateInstance, 
+                            null, 
+                            ctor.GetParameters().Select(_ => Type.Missing).ToArray(), 
+                            CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    createdObject = (Drawable) Activator.CreateInstance(cached);
+                }
+                
                 ApplyAttributes(cached, createdObject, element);
                 return createdObject;
             }
@@ -59,31 +80,33 @@ namespace MML.Factories
 
             var objType = types.FirstOrDefault();
             _cachedObjectTypes[name] = objType;
-            
-            var constructorInfos = objType.GetConstructors()
-                .Where(x => 
-                    x.GetParameters().Length > 0 &&
-                    x.GetParameters()
-                        .Count(param => param.GetCustomAttributes(typeof(OptionalAttribute), false)
-                            .Any()) == x.GetParameters().Length)
-                .ToArray();  
-            
-            if (constructorInfos.Length >= 1)
+
             {
-                var ctor = constructorInfos.First();
-                createdObject = (Drawable) ctor
-                    .Invoke(BindingFlags.OptionalParamBinding | 
-                            BindingFlags.InvokeMethod | 
-                            BindingFlags.CreateInstance, 
-                        null, 
-                        ctor.GetParameters().Select(_ => Type.Missing).ToArray(), 
-                        CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                createdObject = (Drawable) Activator.CreateInstance(objType);
-            }
+                var constructorInfos = objType.GetConstructors()
+                    .Where(x => 
+                        x.GetParameters().Length > 0 &&
+                        x.GetParameters()
+                            .Count(param => param.GetCustomAttributes(typeof(OptionalAttribute), false)
+                                .Any()) == x.GetParameters().Length)
+                    .ToArray();  
             
+                if (constructorInfos.Length >= 1)
+                {
+                    var ctor = constructorInfos.First();
+                    createdObject = (Drawable) ctor
+                        .Invoke(BindingFlags.OptionalParamBinding | 
+                                BindingFlags.InvokeMethod | 
+                                BindingFlags.CreateInstance, 
+                            null, 
+                            ctor.GetParameters().Select(_ => Type.Missing).ToArray(), 
+                            CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    createdObject = (Drawable) Activator.CreateInstance(objType);
+                }
+            }
+
             if (element == null)
                 return createdObject;
 
@@ -92,10 +115,12 @@ namespace MML.Factories
             return createdObject;
         }
 
-        private void ApplyAttributes(Type objType, ITransformable createdObject, XElement element)
+        private void ApplyAttributes(Type objType, Drawable createdObject, XElement element)
         {
             var objProps = objType.GetProperties()
                                   .ToArray();
+
+            createdObject.Name = element.Attribute("Name")?.Value ?? string.Empty;
 
             foreach (var objProp in objProps)
             {

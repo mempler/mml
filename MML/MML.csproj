@@ -2,8 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Title>MML (Mempler's Markdown Language)</Title>
+        <Description>Mempler's Markup Language for osu!Framework. basically HTML just for osu!Framework</Description>
+        <Copyright>Robin A. P.</Copyright>
+        <PackageProjectUrl>https://github.com/Mempler/mml</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/Mempler/mml/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Mempler/mml</RepositoryUrl>
+        <PackageTags>o!F osu!Framework osu MML markup XML XAML</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <PackageReference Include="ppy.osu.Framework" Version="2020.327.0" />
     </ItemGroup>

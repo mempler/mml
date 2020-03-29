@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using osu.Framework.Allocation;
+﻿using osu.Framework.Allocation;
 
 namespace MML.VisualTests.Tests
 {
